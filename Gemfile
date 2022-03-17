@@ -77,3 +77,4 @@ end
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'solargraph', group: :development
 gem 'email_validator'
+gem "pagy", "~> 5.10"
