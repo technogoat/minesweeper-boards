@@ -1,11 +1,11 @@
 class BoardsController < ApplicationController
-  before_action :set_board, only: %i[show edit update destroy]
+  before_action :set_board, only: %i[show]
 
   def home; end
 
   # GET /boards or /boards.json
   def index
-    @pagy, @boards = pagy(Board.order(created_at: :desc), items: 5)
+    @pagy, @boards = pagy(Board.order("#{params[:sort_by]} #{params[:direction]}"), items: 20)
   end
 
   # GET /boards/1 or /boards/1.json
@@ -15,9 +15,6 @@ class BoardsController < ApplicationController
   def new
     @board = Board.new
   end
-
-  # GET /boards/1/edit
-  def edit; end
 
   # POST /boards or /boards.json
   def create
@@ -31,29 +28,6 @@ class BoardsController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @board.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # PATCH/PUT /boards/1 or /boards/1.json
-  def update
-    respond_to do |format|
-      if @board.update(board_params)
-        format.html { redirect_to board_url(@board), notice: 'Board was successfully updated.' }
-        format.json { render :show, status: :ok, location: @board }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @board.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /boards/1 or /boards/1.json
-  def destroy
-    @board.destroy
-
-    respond_to do |format|
-      format.html { redirect_to boards_url, notice: 'Board was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

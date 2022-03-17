@@ -1,16 +1,17 @@
 <div id="pager" class="min-w-full my-8 flex justify-between">
-  <div>
+  <div class="ml-10">
     <% if pagy.prev %>
-    <%= link_to "< Previous page", 
-      boards_path(page: pagy.prev), 
+      <%= link_to "< Previous page", 
+      boards_path(page: pagy.prev, sort_by: params[:sort_by], direction: params[:direction]), 
       class: "rounded py-3 px-5 bg-gray-600 text-white block hover:bg-gray-800",
       data: { turbo_action: 'advance'} %>
     <% end %>
   </div>
-  <div class="text-right">
+  <%== pagy_info(@pagy, item_name: 'Board'.pluralize(@pagy.count)) %>
+  <div class="text-right mr-10">
     <% if pagy.next %>
-    <%= link_to "Next page >", 
-      boards_path(page: pagy.next), 
+      <%= link_to "Next page >", 
+      boards_path(page: pagy.next, sort_by: params[:sort_by], direction: params[:direction]), 
       class: "rounded py-3 px-5 bg-gray-600 text-white block hover:bg-gray-800",
       data: { turbo_action: 'advance' } %>
     <% end %>

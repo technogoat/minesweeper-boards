@@ -16,7 +16,6 @@ class Board < ApplicationRecord
                     unless: proc { |b| b.width.nil? || b.height.nil? }
 
   after_create :generate_board
-  after_create { broadcast_prepend_to('boards') }
 
   private
 
