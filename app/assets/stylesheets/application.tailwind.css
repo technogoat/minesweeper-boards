@@ -29,3 +29,8 @@
 .sort-asc {
   border-bottom: 8px solid #fff;
 }
+
+.board-cell-bomb {
+  background-image: url(/bomb.svg);
+  @apply bg-no-repeat bg-center
+}

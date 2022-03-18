@@ -1,6 +1,6 @@
 class BoardGenerator
   def initialize(width, height, bombs_count)
-    @board = { width: width - 1, height: height - 1 }
+    @board = { x: width - 1, y: height - 1 }
     @bombs_count = bombs_count
   end
 
@@ -10,7 +10,7 @@ class BoardGenerator
   end
 
   def generate_board(bomb_data)
-    board = Array.new(@board[:width] + 1) { Array.new(@board[:height] + 1, 0) }
+    board = Array.new(@board[:x] + 1) { Array.new(@board[:y] + 1, 0) }
 
     bomb_data.each do |x, y_data|
       y_data.each do |y|
@@ -41,6 +41,6 @@ class BoardGenerator
   private
 
   def random_x_y
-    [rand(0..@board[:height]), rand(0..@board[:width])]
+    [rand(0..@board[:x]), rand(0..@board[:y])]
   end
 end

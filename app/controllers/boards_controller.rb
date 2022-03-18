@@ -5,7 +5,7 @@ class BoardsController < ApplicationController
 
   # GET /boards or /boards.json
   def index
-    @pagy, @boards = pagy(Board.order("#{params[:sort_by]} #{params[:direction]}"), items: 20)
+    @pagy, @boards = pagy(Board.order(index_params), items: 20)
   end
 
   # GET /boards/1 or /boards/1.json
@@ -41,5 +41,9 @@ class BoardsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def board_params
     params.require(:board).permit(:email, :name, :width, :height, :bombs)
+  end
+
+  def index_params
+    "#{params[:sort_by] || 'created_at'} #{params[:direction] || 'desc'}"
   end
 end
