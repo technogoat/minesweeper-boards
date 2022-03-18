@@ -1,5 +1,5 @@
 class BoardsController < ApplicationController
-  before_action :set_board, only: %i[show]
+  before_action :set_board, only: %i[show grid]
 
   def home; end
 
@@ -9,7 +9,12 @@ class BoardsController < ApplicationController
   end
 
   # GET /boards/1 or /boards/1.json
-  def show; end
+  def show
+    @skeleton_width = @board.width > 50 ? 50 : @board.width
+    @skeleton_heigth = @board.height > 50 ? 50 : @board.height
+  end
+
+  def grid; end
 
   # GET /boards/new
   def new
