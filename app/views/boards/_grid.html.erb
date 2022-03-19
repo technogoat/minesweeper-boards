@@ -1,0 +1,14 @@
+<% if board.board_data %>
+  <%= turbo_frame_tag "grid_#{board.id}", class: "w-full mb-10 flex bg-white" do %>
+    <div class="w-full mb-10 flex bg-white">
+      <% board.board_data.each_with_index do |x , i| %>
+        <div class="shrink flex-1 w-5">
+          <% x.reverse.each_with_index do |y, z| %>
+            <div class="<%=class_names('border-2 flex-1 h-5 board-cell', {'board-cell-bomb': y.to_i == 1})%>")>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

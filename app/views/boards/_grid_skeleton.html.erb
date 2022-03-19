@@ -1,0 +1,17 @@
+<%= turbo_frame_tag "grid_#{@board.id}", src: grid_board_path(@board), loading: :lazy, class: "loading-grid w-full mb-10 flex bg-white" do %>
+  <div class="w-full flex bg-white">
+    <% grid_skeleton_axis(@board.width).times do %>
+      <div class="shrink flex-1 w-5">
+        <% grid_skeleton_axis(@board.height).times do %>
+          <div class="<%=class_names('border-2 flex-1 h-5 board-cell')%>")>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="spinner">
+    <% if @board.board_data.nil? %>
+      <h1>Board is being generated. Please wait...</h1>
+    <% end %>
+  </div>
+<% end %>

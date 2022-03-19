@@ -9,12 +9,11 @@ class BoardsController < ApplicationController
   end
 
   # GET /boards/1 or /boards/1.json
-  def show
-    @skeleton_width = @board.width > 50 ? 50 : @board.width
-    @skeleton_heigth = @board.height > 50 ? 50 : @board.height
-  end
+  def show; end
 
-  def grid; end
+  def grid
+    render partial: 'grid', locals: { board: @board }
+  end
 
   # GET /boards/new
   def new

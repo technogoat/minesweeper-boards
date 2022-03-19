@@ -16,10 +16,17 @@ class Board < ApplicationRecord
                     unless: proc { |b| b.width.nil? || b.height.nil? }
 
   after_create_commit :generate_board
+  after_update_commit :broadcast_grid, unless: proc { |b| b.board_data.nil? }
 
   private
 
   def generate_board
     BoardsGeneratorJob.perform_later(self)
+  end
+
+  def broadcast_grid
+    Turbo::StreamsChannel.broadcast_replace_to "grid_#{id}", target: "grid_#{id}",
+                                                             partial: 'boards/grid',
+                                                             locals: { board: self }
   end
 end
