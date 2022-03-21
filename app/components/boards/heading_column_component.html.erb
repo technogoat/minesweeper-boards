@@ -1,0 +1,4 @@
+<th class="text-left py-3 px-6 uppercase font-semibold text-sm hover:cursor-pointer relative">
+  <%= sort_indicator if params[:sort_by] == @data[:sort_by] %>
+  <%= sort_link(sort_by: @data[:sort_by], label: @data[:label]) %>
+</th>

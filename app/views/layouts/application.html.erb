@@ -10,7 +10,26 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <%= render partial: 'shared/header' %>
+    <nav class="bg-gray-800 p-2 mt-0 fixed w-full z-10 top-0">
+      <div class="container mx-auto flex flex-wrap items-center">
+        <div class="flex w-full md:w-1/2 justify-center md:justify-start text-white font-extrabold">
+          <a class="text-white no-underline hover:text-white hover:no-underline" href="#">
+            <%= link_to 'Rails Mineboard Generator', root_path %>
+          </a>
+        </div>
+        <div class="flex w-full pt-2 content-center justify-between md:w-1/2 md:justify-end">
+          <ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
+            <li class="mr-3">
+              <%= render Ui::ButtonComponent.new('Generate New Board', 
+                new_board_path, 
+                'bg-blue-600 hover:bg-blue-400 font-medium', 
+                { turbo_frame: 'modal' }) 
+              %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>

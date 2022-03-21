@@ -1,0 +1,36 @@
+<div class="flex flex-col space-y-6">
+  <table class="min-w-full bg-white">
+    <thead class="bg-gray-600 text-white">
+      <tr>
+        <% if heading_columns? %>
+          <% heading_columns.each do |th| %>
+            <%= th %>
+          <% end %>
+          <th class="text-left py-3 px-6 uppercase font-semibold text-sm">
+            #
+          </th>
+        <% else %>
+          <th class="py-3 px-6 relative">
+            Loading...
+          </th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody class="text-gray-700">
+      <% if body_rows? %>
+        <% body_rows.each do |tr| %>
+          <%= tr %>
+        <% end %>
+      <% else %>
+        <% 25.times do%>
+          <tr class="py-3 px-6 relative">
+            <td class="text-left py-3 px-6">
+              <div class="animate-pulse flex space-x-4 h-4 bg-gray-400 rounded w-full">
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

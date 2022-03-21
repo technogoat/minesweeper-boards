@@ -9,6 +9,8 @@ class BoardGenerator
     generate_board(bomb_data)
   end
 
+  private
+
   def generate_board(bomb_data)
     board = Array.new(@board[:x] + 1) { Array.new(@board[:y] + 1, 0) }
 
@@ -37,8 +39,6 @@ class BoardGenerator
 
     existing_bombs
   end
-
-  private
 
   def random_x_y
     [rand(0..@board[:x]), rand(0..@board[:y])]

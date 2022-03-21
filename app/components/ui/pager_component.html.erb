@@ -1,0 +1,23 @@
+<div id="pager" class="min-w-full my-8 flex justify-between">
+  <div class="ml-10">
+    <% if @pagy.prev %>
+      <%= render Ui::ButtonComponent.new(
+        '< Previous page', 
+        boards_path(page: @pagy.prev, sort_by: params[:sort_by], direction: params[:direction]),
+        'bg-gray-600 hover:bg-gray-800',
+        { turbo_action: 'advance'}) 
+      %>
+    <% end %>
+  </div>
+  <%== pagy_info(@pagy, item_name: 'Board'.pluralize(@pagy.count)) %>
+  <div class="text-right mr-10">
+    <% if @pagy.next %>
+      <%= render Ui::ButtonComponent.new(
+        'Next page >', 
+        boards_path(page: @pagy.next, sort_by: params[:sort_by], direction: params[:direction]),
+        'bg-gray-600 hover:bg-gray-800',
+        { turbo_action: 'advance'}) 
+      %>
+    <% end %>
+  </div>
+</div>

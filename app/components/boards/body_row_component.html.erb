@@ -1,0 +1,9 @@
+<tr>
+  <td class="text-left py-3 px-6"><%= @data.name %></td>
+  <td class="text-left py-3 px-6"><%= @data.width %></td>
+  <td class="text-left py-3 px-6"><%= @data.height %></td>
+  <td class="text-left py-3 px-6"><%= @data.bombs %></td>
+  <td class="text-left py-3 px-6"><%= @data.email %></td>
+  <td class="text-left py-3 px-6"><%= time_tag @data.created_at, 'data-local': 'time-ago' %></td>
+  <td class="text-left py-3 px-6"><%= link_to 'View Board', board_path(@data), data: {turbo: false} %></td>
+</tr>
