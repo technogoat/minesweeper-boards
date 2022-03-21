@@ -1,48 +1,52 @@
-require "test_helper"
+require 'test_helper'
 
 class BoardsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @board = boards(:one)
   end
 
-  test "should get index" do
+  test 'should get all boards' do
+    get all_boards_url
+    assert_response :success
+  end
+
+  test 'should get index' do
     get boards_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_board_url
     assert_response :success
   end
 
-  test "should create board" do
-    assert_difference("Board.count") do
-      post boards_url, params: { board: { bombs: @board.bombs, email: @board.email, height: @board.height, name: @board.name, width: @board.width } }
+  test 'should create board' do
+    assert_difference('Board.count') do
+      post boards_url,
+           params: { board: { bombs: @board.bombs, email: @board.email, height: @board.height, name: @board.name,
+                              width: @board.width, board_data: [[0, 0], [0, 1]] } }
     end
 
     assert_redirected_to board_url(Board.last)
   end
 
-  test "should show board" do
+  test 'should create board ignoring unpermitted params' do
+    assert_difference('Board.count') do
+      post boards_url,
+           params: { board: { bombs: @board.bombs, email: @board.email, height: @board.height, name: @board.name,
+                              width: @board.width, board_data: [[0, 0], [0, 1]] } }
+    end
+
+    assert_redirected_to board_url(Board.last)
+  end
+
+  test 'should show board' do
     get board_url(@board)
     assert_response :success
   end
 
-  test "should get edit" do
-    get edit_board_url(@board)
+  test 'should get board grid' do
+    get grid_board_url(@board)
     assert_response :success
-  end
-
-  test "should update board" do
-    patch board_url(@board), params: { board: { bombs: @board.bombs, email: @board.email, height: @board.height, name: @board.name, width: @board.width } }
-    assert_redirected_to board_url(@board)
-  end
-
-  test "should destroy board" do
-    assert_difference("Board.count", -1) do
-      delete board_url(@board)
-    end
-
-    assert_redirected_to boards_url
   end
 end

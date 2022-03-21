@@ -1,4 +1,9 @@
 <section class="text-gray-600 body-font mx-auto" style="overflow: auto;">
+  <div class="mx-auto text-center">
+    <% if notice.present? %>
+      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+    <% end%>
+  </div>
   <%= turbo_stream_from "grid_#{@board.id}" %>
   <%= render partial: 'grid_skeleton', locals: { board: @board } %>
   <div class="container mx-auto flex flex-col px-5 py-24 justify-center items-center">
