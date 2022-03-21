@@ -1,0 +1,11 @@
+<%= turbo_frame_tag "boards", class: "min-w-full" do %>
+  <%= render Boards::TableComponent.new do |table_component| %>
+    <% @heading_columns.each do |heading_column| %>
+      <% table_component.heading_column(heading_column) %>
+    <% end %>
+    <% @boards.each do |board| %>
+      <% table_component.body_row(board) %>
+    <% end %>
+  <% end %>
+  <%= render Ui::PagerComponent.new(@pagy) %>
+<% end %>

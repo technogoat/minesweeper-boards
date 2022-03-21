@@ -1,11 +1,9 @@
-<%= turbo_frame_tag "boards", class: "min-w-full" do %>
-  <%= render Boards::TableComponent.new do |table_component| %>
-    <% @heading_columns.each do |heading_column| %>
-      <% table_component.heading_column(heading_column) %>
-    <% end %>
-    <% @boards.each do |board| %>
-      <% table_component.body_row(board) %>
-    <% end %>
-  <% end %>
-  <%= render Ui::PagerComponent.new(@pagy) %>
-<% end %>
+<div class="w-full">
+  <div id="boards" class="max-w-7xl mx-auto mt-12">
+    <div class="shadow overflow-hidden rounded border-b border-gray-200">
+      <%= turbo_frame_tag "boards", src: all_boards_path, loading: :lazy, class: "min-w-full" do %>
+        <%= render Boards::TableComponent.new() %>
+      <% end %>
+    </div>
+  </div>
+</div>

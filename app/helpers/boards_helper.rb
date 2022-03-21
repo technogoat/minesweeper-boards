@@ -1,6 +1,6 @@
 module BoardsHelper
   def sort_link(label:, sort_by: 'created_at')
-    link_to(label, boards_path(sort_by:, direction: toggle_direction(sort_by), page: params[:page]),
+    link_to(label, all_boards_path(sort_by:, direction: toggle_direction(sort_by), page: params[:page]),
             data: { turbo_action: 'advance' })
   end
 

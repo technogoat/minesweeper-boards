@@ -1,10 +1,14 @@
 class BoardsController < ApplicationController
   before_action :set_board, only: %i[show grid]
 
-  def home; end
+  def home
+    @boards = Board.order(created_at: :desc).limit(10)
+  end
 
   # GET /boards
-  def index
+  def index; end
+
+  def all
     @heading_columns = [
       { sort_by: 'name', label: 'Name' },
       { sort_by: 'width', label: 'Width' },

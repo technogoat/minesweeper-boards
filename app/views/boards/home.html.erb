@@ -1,9 +1,24 @@
 <div class="w-full">
-  <div id="boards" class="max-w-7xl mx-auto mt-12">
-    <div class="shadow overflow-hidden rounded border-b border-gray-200">
-      <%= turbo_frame_tag "boards", src: boards_path, loading: :lazy, class: "min-w-full" do %>
-        <%= render Boards::TableComponent.new() %>
+  <div class="max-w-7xl mx-auto mt-12 text-center pb-6">
+    <h2 class="sm:text-3xl text-2xl title-font font-medium text-gray-900 mt-4 mb-4">Latest 10 generated boards</h2>
+    <div class="shadow overflow-hidden mb-6 rounded border-b border-gray-200 flex flex-col w-full">
+      <% @boards.each do |board| %>
+        <%= link_to board_path(board.id) do %>
+          <div class="p-3 md:w-10/11">
+            <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
+              <div class="flex items-center mb-3">
+                <h2 class="text-gray-900 text-lg title-font font-medium"><%= "#{board.name} (#{board.width}x#{board.height})" %></h2>
+              </div>
+              <div class="flex border-t border-gray-200 py-2">
+                <span class="text-gray-500">Created by</span>
+                <span class="ml-2 text-gray-900"><%= board.email %></span>
+                <span class="ml-auto text-gray-900"><%= time_tag board.created_at, 'data-local': 'time-ago' %></span>
+              </div>
+            </div>
+          </div>
+        <% end %>
       <% end %>
     </div>
+    <%= link_to 'View all generated boards', all_boards_path %>
   </div>
 </div>
