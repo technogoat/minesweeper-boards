@@ -24,23 +24,23 @@ class BoardGenerator
   end
 
   def generate_bomb_data
-    existing_bombs = {}
     bomb_counter = 0
+    bombs = {}
+    board = Array.new(@board[:x] + 1) { |x| Array.new(@board[:y] + 1) { |y| { x:, y: } } }
 
     while bomb_counter < @bombs_count
-      x, y = random_x_y
+      x_i = rand(0..board.length - 1)
+      y_i = rand(0..board[x_i].length - 1)
 
-      next if existing_bombs[x]&.include?(y)
+      bombs[board[x_i][y_i][:x]] = [] if bombs[board[x_i][y_i][:x]].nil?
+      bombs[board[x_i][y_i][:x]] << board[x_i][y_i][:y]
 
-      existing_bombs[x] = [] if existing_bombs[x].nil?
-      existing_bombs[x] << y
+      board[x_i].delete_at(y_i)
+      board.delete_at(x_i) if board[x_i].empty?
+
       bomb_counter += 1
     end
 
-    existing_bombs
-  end
-
-  def random_x_y
-    [rand(0..@board[:x]), rand(0..@board[:y])]
+    bombs
   end
 end
